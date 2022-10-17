@@ -1,0 +1,22 @@
+extends layout
+
+block content
+  h1= title
+  h2 Course Registration
+
+  p Select Course:
+  form(action= `course-registration/courses`, method="post")
+    select(name = 'course')
+      option(value = 'math101') Math 101
+      option(value = 'compsci101') Compsci 101
+      option(value = 'algorithms101') Algorithms 101
+      option(value = 'database101') Database 101
+      option(value = 'physics401') Physics 401
+    input(type="submit", value="Add Course")
+
+
+  h2 Added Courses
+  .courses
+  ul
+    each course in loggedInUser.courses
+      li= course.name

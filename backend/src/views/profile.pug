@@ -6,7 +6,7 @@ block content
 
   h2 Who's taking which course?
   .courses
-  each course in courses
+  each course in student.courses
     h4= course.name
     ul
       each student in course.takenBy

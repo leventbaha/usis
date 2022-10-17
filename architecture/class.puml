@@ -1,6 +1,43 @@
-@startuml Person 
-class Person {
-  name: string
-  age: number
+@startuml USIS
+
+class Student {
+  studentID: Number
+  username: String
+  password: String
+  courses: Course[]
+  exams: Exam []
+
+  addCourse(course)
 }
+
+class Course {
+  courseName: String
+  courseLimit: Number
+  takenBy: Student[]
+
+  registerStudent(student: Student)
+}
+
+class Exam {
+  course: String
+  date: Date
+  time: Date
+  location: String
+  takenBy: []
+}
+
+class Schedule {
+  time: Date
+  days: String
+  courses: String
+}
+
+Student o--> Course: takes a Course
+
+Student o--> Exam: has exams
+Course *--> Exam
+Course o--> Schedule
+Schedule o--> Course: has some courses
+Course o--> Student: is taken by
+
 @enduml

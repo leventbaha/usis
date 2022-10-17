@@ -1,21 +1,7 @@
-const express = require('express')
-const Student = require('../models/student')
-const Course = require('../models/course')
+const Student = require('./student')
+const Course = require('./course')
 
-const { courses } = require('../models')
-
-const router = express.Router()
-
-/* GET home page. */
-router.get('/', (req, res) => {
-  res.render('index', { title: `USIS`, courses })
-})
-
-router.get('/log-in', (req, res) => {
-  res.render('log-in', { title: `USIS`, courses })
-})
-
-router.get('/initialize', async (req, res) => {
+async function main() {
   const marie = new Student({
     studentID: 9587,
     name: 'marie',
@@ -77,6 +63,18 @@ router.get('/initialize', async (req, res) => {
     year: 1,
     department: ['Computer Science', 'Physics', 'Biology'],
     preRequisites: [],
+    slots: [
+      {
+        day: 0,
+        start: 0,
+        length: 2,
+      },
+      {
+        day: 2,
+        start: 3,
+        length: 2,
+      },
+    ],
   })
   const compsci101 = await Course.create({
     name: 'compsci101',
@@ -132,7 +130,17 @@ router.get('/initialize', async (req, res) => {
   await lisa.addCourse(anatomy101)
   await lisa.addCourse(evolution301)
 
-  return res.sendStatus(200)
-})
+  console.log(marie)
+}
 
-module.exports = router
+// main()
+
+// const students = [marie, markus, thomas, günther, lisa]
+
+// const courses = [math101, compsci101, algorithms201, database301, physics401, anatomy101, evolution301]
+
+// module.exports = {
+//   students,
+//   courses,
+//   loggedInUser: marie,
+// }
